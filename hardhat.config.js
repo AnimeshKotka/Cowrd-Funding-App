@@ -1,10 +1,3 @@
-// require("@nomicfoundation/hardhat-toolbox");
-// require("@nomiclabs/hardhat-waffle");
-// require("hardhat-gas-reporter");
-// require("@nomiclabs/hardhat-etherscan");
-// require("dotenv").config();
-// require("solidity-coverage");
-// require("hardhat-deploy");
 require("@nomiclabs/hardhat-waffle");
 require("hardhat-gas-reporter");
 require("@nomiclabs/hardhat-etherscan");
@@ -13,6 +6,9 @@ require("solidity-coverage");
 require("hardhat-deploy");
 /** @type import('hardhat/config').HardhatUserConfig */
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
+const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "";
+const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY || "";
+
 module.exports = {
   defaultNetwork: "hardhat",
   networks: {
@@ -39,6 +35,16 @@ module.exports = {
         version: "0.6.0",
       },
     ],
+  },
+  etherscan: {
+    apiKey: ETHERSCAN_API_KEY,
+  },
+  gasReporter: {
+    enabled: true,
+    currency: "USD",
+    outputFile: "gas-report.txt",
+    noColors: true,
+    coinmarketcap: COINMARKETCAP_API_KEY,
   },
   namedAccounts: {
     deployer: {
