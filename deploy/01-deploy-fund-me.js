@@ -11,11 +11,12 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
   if (developmentChains.includes(network.name)) {
     const ehtUSDAggrigator = get("MockV3Aggregator");
     ethUsdPriceFeedAddress =
-      ehtUSDAggrigator.address || "0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e";
+      ehtUSDAggrigator.address || networkConfig[5].ethUsdPriceFeed;
   } else {
     ethUsdPriceFeedAddress = networkConfig[chainId].ethUsdPriceFeed;
   }
 
+  log(ethUsdPriceFeedAddress);
   const args = [ethUsdPriceFeedAddress];
   log("args", args);
   const fundMe = await deploy("FundMe", {
